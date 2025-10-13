@@ -3,16 +3,20 @@ package Lab2;
 import java.util.ArrayList;
 
 public class zad1 {
-    public static void main(String[] args) {
-        ArrayList<Integer> tab = new ArrayList<Integer>();
-        while (tab.size() < 5) 
+    public static ArrayList<Integer> tab = new ArrayList<>();
+
+    public static void main(String[] args) 
+    {
+        ArrayList<Integer> temp = new ArrayList<>();
+        while (temp.size() < 5) 
         {
-            int liczba = (int)(Math.random() * 100);
-            if (!tab.contains(liczba)) 
+            int liczba = (int) (Math.random() * 49);
+            if (!temp.contains(liczba)) 
             {
-                tab.add(liczba);
+                temp.add(liczba);
             }
         }
-        System.out.println(tab);
+        tab = temp;
+        System.out.println("Wylosowane: " + tab);
     }
 }
