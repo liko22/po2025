@@ -4,13 +4,13 @@ public class Animal {
     String name;
     int legs;
 
-    // Constructor to initialize name and legs
+
     public Animal(String name, int legs) {
         this.name = name;
         this.legs = legs;
     }
 
-    // Getter and Setter methods for name and legs
+
     public String getName() {
         return name;
     }
@@ -27,7 +27,6 @@ public class Animal {
         this.legs = legs;
     }
 
-    // Method to return a description of the animal
     public String getDescription() {
         return "To  " + name + " z " + legs + " nogami.";
     }

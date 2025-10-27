@@ -20,7 +20,7 @@ public class Zoo {
         String[] names = {"Rex", "Polly", "Kaa", "Buddy", "Coco", "Slither"};
 
         for (int i = 0; i < animals.length; i++) {
-            int choice = random.nextInt(3); // 0 = Dog, 1 = Parrot, 2 = Snake
+            int choice = random.nextInt(3);
             String name = names[random.nextInt(names.length)];
 
             switch (choice) {
