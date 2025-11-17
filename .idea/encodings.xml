@@ -5,5 +5,7 @@
     <file url="file://$PROJECT_DIR$/samochod/src/main/resources" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/symulator/src/main/java" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/symulator/src/main/resources" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/symulatorGUI/src/main/java" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/symulatorGUI/src/main/resources" charset="UTF-8" />
   </component>
 </project>
