@@ -25,12 +25,12 @@
                     <menus>
                         <Menu mnemonicParsing="false" text="Plik">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Zamknij" />
+                                <MenuItem fx:id="zamknijMenuItem" mnemonicParsing="false" text="Zamknij" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Edycja">
                             <items>
-                                <MenuItem mnemonicParsing="false" text="Usuń" />
+                                <MenuItem fx:id="usunMenuItem" mnemonicParsing="false" text="Usuń" />
                             </items>
                         </Menu>
                         <Menu mnemonicParsing="false" text="Hello!" />
@@ -39,9 +39,9 @@
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <children>
                         <Label text="Samochód:" />
-                        <ComboBox prefWidth="150.0" />
-                        <Button mnemonicParsing="false" text="Dodaj nowy" />
-                        <Button mnemonicParsing="false" text="Usuń" />
+                        <ComboBox fx:id="samochodComboBox" prefWidth="150.0" />
+                        <Button fx:id="dodajNowyButton" mnemonicParsing="false" text="Dodaj nowy" />
+                        <Button fx:id="usunButton" mnemonicParsing="false" text="Usuń" />
                     </children>
                     <padding>
                         <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
@@ -59,20 +59,20 @@
                         <VBox spacing="5.0">
                             <children>
                                 <Label text="Model" />
-                                <TextField />
+                                <TextField fx:id="modelTextField" />
                                 <Label text="Nr rejestracyjny" />
-                                <TextField />
+                                <TextField fx:id="nrRejestracyjnyTextField" />
                                 <Label text="Waga" />
-                                <TextField />
+                                <TextField fx:id="wagaTextField" />
                                 <Label text="Prędkość" />
-                                <TextField />
+                                <TextField fx:id="predkoscTextField" />
                                 <HBox spacing="5.0">
                                     <children>
-                                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Włącz" HBox.hgrow="ALWAYS" />
-                                        <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Wyłącz" HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="wlaczButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Włącz" HBox.hgrow="ALWAYS" />
+                                        <Button fx:id="wylaczButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Wyłącz" HBox.hgrow="ALWAYS" />
                                     </children>
                                 </HBox>
-                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Button" />
+                                <Button fx:id="przyciskButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Button" />
                             </children>
                         </VBox>
                         <TitledPane animated="false" collapsible="false" text="Skrzynia Biegów">
@@ -80,17 +80,21 @@
                                 <VBox spacing="5.0">
                                     <children>
                                         <Label text="Nazwa" />
-                                        <TextField />
+                                        <TextField fx:id="skrzyniaNazwaTextField" />
                                         <Label text="Cena" />
-                                        <TextField />
+                                        <TextField fx:id="skrzyniaCenaTextField" />
                                         <Label text="Waga" />
-                                        <TextField />
+                                        <TextField fx:id="skrzyniaWagaTextField" />
                                         <Label text="Bieg" />
-                                        <TextField />
+                                        <TextField fx:id="skrzyniaBiegTextField" />
                                         <HBox spacing="5.0">
                                             <children>
-                                                <Button maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Zwiększ bieg" HBox.hgrow="ALWAYS" />
-                                                <Button maxWidth="1.7976931348623157E308" text="Zmniejsz bieg" HBox.hgrow="ALWAYS" />
+                                                <HBox spacing="5.0">
+                                                    <children>
+                                                        <Button fx:id="zwiekszBiegButton" maxWidth="1.7976931348623157E308" mnemonicParsing="false" text="Zwiększ bieg" HBox.hgrow="ALWAYS" onAction="#onZwiekszBiegButtonClick" />
+                                                        <Button fx:id="zmniejszBiegButton" maxWidth="1.7976931348623157E308" text="Zmniejsz bieg" HBox.hgrow="ALWAYS" onAction="#onZmniejszBiegButtonClick" />
+                                                    </children>
+                                                </HBox>
                                             </children>
                                         </HBox>
                                     </children>
@@ -102,17 +106,17 @@
                                 <VBox spacing="5.0">
                                     <children>
                                         <Label text="Nazwa" />
-                                        <TextField />
+                                        <TextField fx:id="silnikNazwaTextField" />
                                         <Label text="Cena" />
-                                        <TextField />
+                                        <TextField fx:id="silnikCenaTextField" />
                                         <Label text="Waga" />
-                                        <TextField />
+                                        <TextField fx:id="silnikWagaTextField" />
                                         <Label text="Obroty" />
-                                        <TextField />
+                                        <TextField fx:id="silnikObrotyTextField" />
                                         <HBox spacing="5.0">
                                             <children>
-                                                <Button maxWidth="1.7976931348623157E308" text="Dodaj gazu" HBox.hgrow="ALWAYS" />
-                                                <Button maxWidth="1.7976931348623157E308" text="Ujmij gazu" HBox.hgrow="ALWAYS" />
+                                                <Button fx:id="dodajGazButton" maxWidth="1.7976931348623157E308" text="Dodaj gazu"  HBox.hgrow="ALWAYS" />
+                                                <Button fx:id="ujmijGazButton" maxWidth="1.7976931348623157E308" text="Ujmij gazu" HBox.hgrow="ALWAYS" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -124,17 +128,17 @@
                                 <VBox spacing="5.0">
                                     <children>
                                         <Label text="Nazwa" />
-                                        <TextField />
+                                        <TextField fx:id="sprzegloNazwaTextField" />
                                         <Label text="Cena" />
-                                        <TextField />
+                                        <TextField fx:id="sprzegloCenaTextField" />
                                         <Label text="Waga" />
-                                        <TextField />
+                                        <TextField fx:id="sprzegloWagaTextField" />
                                         <Label text="Stan" />
-                                        <TextField />
+                                        <TextField fx:id="sprzegloStanTextField" />
                                         <HBox spacing="5.0">
                                             <children>
-                                                <Button maxWidth="1.7976931348623157E308" text="Naciśnij" HBox.hgrow="ALWAYS" />
-                                                <Button maxWidth="1.7976931348623157E308" text="Zwolnij" HBox.hgrow="ALWAYS" />
+                                                <Button fx:id="nacisnijButton" maxWidth="1.7976931348623157E308" text="Naciśnij" HBox.hgrow="ALWAYS" />
+                                                <Button fx:id="zwolnijButton" maxWidth="1.7976931348623157E308" text="Zwolnij" HBox.hgrow="ALWAYS" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -157,14 +161,14 @@
                         <HBox alignment="CENTER_LEFT" spacing="10.0">
                             <children>
                                 <Label text="Mapa" style="-fx-font-weight: bold;"/>
-                                <ImageView fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
+                                <ImageView fx:id="mapaImageView" fitHeight="80.0" fitWidth="80.0" pickOnBounds="true" preserveRatio="true">
                                     <image>
                                         <Image url="@car.png" />
                                     </image>
                                 </ImageView>
                                 <VBox alignment="CENTER_LEFT">
                                     <children>
-                                        <Label text="Car" />
+                                        <Label fx:id="carLabel" text="Car" />
                                     </children>
                                 </VBox>
                             </children>
