@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox spacing="10" alignment="TOP_LEFT"
+      xmlns="http://javafx.com/javafx/17"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="org.example.symulatorgui.DodajSamochodController">
+
+    <padding>
+        <Insets top="20" right="20" bottom="20" left="20"/>
+    </padding>
+
+    <Label text="Model:" />
+    <TextField fx:id="modelTextField" promptText="Wprowadź model" />
+
+    <Label text="Numer rejestracyjny:" />
+    <TextField fx:id="registrationTextField" promptText="Wprowadź numer rejestracyjny" />
+
+    <Label text="Waga (kg):" />
+    <TextField fx:id="weightTextField" promptText="Wprowadź wagę (np. 1200.5)" />
+
+    <Label text="Prędkość maksymalna (km/h):" />
+    <TextField fx:id="speedTextField" promptText="Wprowadź prędkość maks. (np. 200)" />
+
+    <Label text="Typ Silnika:" />
+    <ComboBox fx:id="engineComboBox" prefWidth="1.7976931348623157E308" promptText="Wybierz silnik" />
+
+    <Label text="Typ Skrzyni Biegów:" />
+    <ComboBox fx:id="gearboxComboBox" prefWidth="1.7976931348623157E308" promptText="Wybierz skrzynię" />
+
+    <HBox spacing="10" alignment="CENTER_RIGHT">
+        <Button fx:id="confirmButton" text="Zatwierdź" onAction="#onConfirmButton" />
+        <Button fx:id="cancelButton" text="Anuluj" onAction="#onCancelButton" />
+    </HBox>
+</VBox>

@@ -15,7 +15,6 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.layout.Priority?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="org.example.symulatorgui.HelloController">
     <top>
@@ -40,7 +39,7 @@
                     <children>
                         <Label text="Samochód:" />
                         <ComboBox fx:id="samochodComboBox" prefWidth="150.0" />
-                        <Button fx:id="dodajNowyButton" mnemonicParsing="false" text="Dodaj nowy" />
+                        <Button fx:id="dodajNowyButton" mnemonicParsing="false" text="Dodaj nowy" onAction="#openAddCarWindow" />
                         <Button fx:id="usunButton" mnemonicParsing="false" text="Usuń" />
                     </children>
                     <padding>
