@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.image.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="800.0" prefWidth="1200.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="samochod.HelloController">
+    <top>
+        <MenuBar BorderPane.alignment="CENTER">
+            <menus>
+                <Menu mnemonicParsing="false" text="Plik" />
+                <Menu mnemonicParsing="false" text="Edycja" />
+            </menus>
+        </MenuBar>
+    </top>
+    <left>
+        <ScrollPane fitToWidth="true" prefWidth="270.0" BorderPane.alignment="CENTER">
+            <content>
+                <VBox spacing="0.0" style="-fx-border-color: #d3d3d3; -fx-background-color: #f4f4f4;">
+                    <children>
+                        <TitledPane animated="false" collapsible="false" text="Samochód">
+                            <content>
+                                <VBox spacing="5.0">
+                                    <children>
+                                        <Label text="Model" />
+                                        <TextField />
+                                        <Label text="Nr rejestracyjny" />
+                                        <TextField />
+                                        <Label text="Waga" />
+                                        <TextField />
+                                        <Label text="Prędkość" />
+                                        <TextField />
+                                        <HBox spacing="10.0">
+                                            <children>
+                                                <Button mnemonicParsing="false" text="Włącz" />
+                                                <Button mnemonicParsing="false" text="Wyłącz" />
+                                                <Button mnemonicParsing="false" text="Button" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </content>
+                        </TitledPane>
+                        <TitledPane animated="false" collapsible="false" text="Skrzynia Biegów">
+                            <content>
+                                <VBox spacing="5.0">
+                                    <children>
+                                        <Label text="Nazwa" />
+                                        <TextField />
+                                        <Label text="Cena" />
+                                        <TextField />
+                                        <Label text="Waga" />
+                                        <TextField />
+                                        <Label text="Bieg" />
+                                        <TextField />
+                                        <HBox spacing="10.0">
+                                            <children>
+                                                <Button mnemonicParsing="false" text="Zwiększ bieg" />
+                                                <Button mnemonicParsing="false" text="Zmniejsz bieg" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </content>
+                        </TitledPane>
+                        <TitledPane animated="false" collapsible="false" text="Silnik">
+                            <content>
+                                <VBox spacing="5.0">
+                                    <children>
+                                        <Label text="Nazwa" />
+                                        <TextField />
+                                        <Label text="Cena" />
+                                        <TextField />
+                                        <Label text="Waga" />
+                                        <TextField />
+                                        <Label text="Obroty" />
+                                        <TextField />
+                                        <HBox spacing="10.0">
+                                            <children>
+                                                <Button mnemonicParsing="false" text="Dodaj gazu" />
+                                                <Button mnemonicParsing="false" text="Ujmij gazu" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </content>
+                        </TitledPane>
+                        <TitledPane animated="false" collapsible="false" text="Sprzęgło">
+                            <content>
+                                <VBox spacing="5.0">
+                                    <children>
+                                        <Label text="Nazwa" />
+                                        <TextField />
+                                        <Label text="Cena" />
+                                        <TextField />
+                                        <Label text="Waga" />
+                                        <TextField />
+                                        <Label text="Stan" />
+                                        <TextField />
+                                        <HBox spacing="10.0">
+                                            <children>
+                                                <Button mnemonicParsing="false" text="Naciśnij" />
+                                                <Button mnemonicParsing="false" text="Zwolnij" />
+                                            </children>
+                                        </HBox>
+                                    </children>
+                                </VBox>
+                            </content>
+                        </TitledPane>
+                    </children>
+                </VBox>
+            </content>
+        </ScrollPane>
+    </left>
+    <center>
+        <AnchorPane style="-fx-background-color: #90ee90;" BorderPane.alignment="CENTER">
+            <children>
+                <HBox alignment="CENTER" layoutX="450.0" layoutY="14.0" spacing="10.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
+                    <children>
+                        <Label text="Samochód:" />
+                        <ComboBox prefWidth="150.0" />
+                        <Button mnemonicParsing="false" text="Dodaj nowy" />
+                        <Button mnemonicParsing="false" text="Usuń" />
+                    </children>
+                </HBox>
+                <Label layoutX="14.0" layoutY="14.0" text="Mapa" />
+                <VBox alignment="CENTER" layoutX="14.0" layoutY="44.0" spacing="5.0">
+                    <children>
+                        <ImageView fitHeight="60.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                            <image>
+                                <Image url="@auto1.png" />
+                            </image>
+                        </ImageView>
+                        <Label text="Car" />
+                    </children>
+                </VBox>
+            </children>
+        </AnchorPane>
+    </center>
+</BorderPane>

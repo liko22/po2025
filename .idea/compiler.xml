@@ -8,10 +8,12 @@
         <outputRelativeToContentRoot value="true" />
         <module name="symulator" />
         <module name="symulatorGUI" />
+        <module name="samochod-gui" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="samochod" target="20" />
+      <module name="samochodgui" target="20" />
     </bytecodeTargetLevel>
   </component>
 </project>
