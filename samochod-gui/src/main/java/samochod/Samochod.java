@@ -2,14 +2,10 @@ package samochod;
 
 public class Samochod {
     private boolean stanWlaczenia;
-    private String nrRejest;
-    private String model;
-    private int predkoscMax;
-
+    private int predkoscMax = 180;
     private SkrzyniaBiegow skrzynia = new SkrzyniaBiegow(6);
     private Silnik silnik = new Silnik();
     private Sprzeglo sprzeglo = new Sprzeglo();
-    private Pozycja aktualnaPozycja;
 
     public void wlacz() {
         stanWlaczenia = true;
@@ -22,26 +18,20 @@ public class Samochod {
         skrzynia.setAktualnyBieg(0);
     }
 
-    public void jedzDo(Pozycja cel) {
-    }
-
-    public double getWaga() {
-        return 0;
+    public boolean isStanWlaczenia() {
+        return stanWlaczenia;
     }
 
     public int getAktPredkosc() {
-        return 0;
+        if (!stanWlaczenia) return 0;
+        int bieg = skrzynia.getAktBieg();
+        if (bieg <= 0) return 0;
+
+        int obliczona = bieg * (silnik.getObroty() / 200);
+        return Math.min(obliczona, predkoscMax);
     }
 
-    public Pozycja getAktPozycja() {
-        return aktualnaPozycja;
-    }
-
-    public Sprzeglo getSprzeglo() {
-        return sprzeglo;
-    }
-
-    public SkrzyniaBiegow getSkrzynia() {
-        return skrzynia;
-    }
+    public Silnik getSilnik() { return silnik; }
+    public Sprzeglo getSprzeglo() { return sprzeglo; }
+    public SkrzyniaBiegow getSkrzynia() { return skrzynia; }
 }

@@ -1,15 +1,76 @@
 package samochod;
 
+import javafx.animation.AnimationTimer;
 import javafx.fxml.FXML;
 import javafx.scene.control.TextField;
+import javafx.fxml.Initializable;
+import javafx.scene.layout.VBox;
+import javafx.scene.layout.AnchorPane;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-public class HelloController {
+public class HelloController implements Initializable {
     private Samochod samochod = new Samochod();
+    private AnimationTimer timer;
+
+    @FXML private TextField stanSprzeglaField;
+    @FXML private TextField biegField;
+    @FXML private TextField predkoscField;
+    @FXML private TextField obrotyField;
+    @FXML private VBox autoContainer;
+    @FXML private AnchorPane mapaPane;
+
+    @Override
+    public void initialize(URL url, ResourceBundle resourceBundle) {
+        stanSprzeglaField.setText("Zwolnione");
+
+        timer = new AnimationTimer() {
+            @Override
+            public void handle(long now) {
+                int predkosc = samochod.getAktPredkosc();
+                if (predkosc > 0) {
+                    double aktualnyTranslate = autoContainer.getTranslateX();
+                    double layoutX = autoContainer.getLayoutX();
+                    double szerokoscMapy = mapaPane.getWidth();
+
+                    double nowaPozycja = aktualnyTranslate + (predkosc / 50.0);
+
+                    if (layoutX + nowaPozycja > szerokoscMapy) {
+                        autoContainer.setTranslateX(0);
+                    } else {
+                        autoContainer.setTranslateX(nowaPozycja);
+                    }
+                }
+                aktualizujInterfejs();
+            }
+        };
+        timer.start();
+    }
 
     @FXML
-    private TextField stanSprzeglaField;
+    private void onWlaczClick() {
+        samochod.wlacz();
+    }
+
     @FXML
-    private TextField biegField;
+    private void onWylaczClick() {
+        samochod.wylacz();
+    }
+
+    @FXML
+    private void onPrzyspieszClick() {
+        if (!samochod.isStanWlaczenia()) {
+            return;
+        }
+        if (!samochod.getSprzeglo().isStanSprzegla()) {
+            samochod.getSilnik().zwiekszObroty();
+        }
+    }
+
+    @FXML
+    private void onZatrzymajClick() {
+        samochod.getSilnik().zmniejszObroty();
+    }
 
     @FXML
     private void onNacisnijSprzegloClick() {
@@ -27,9 +88,8 @@ public class HelloController {
     private void onZwiekszBiegClick() {
         if (samochod.getSprzeglo().isStanSprzegla()) {
             samochod.getSkrzynia().zwiekszBieg();
-            pokazBieg();
         } else {
-            pokazBiegGdyNiewcisniete();
+            pokazBladSprzegla();
         }
     }
 
@@ -37,33 +97,33 @@ public class HelloController {
     private void onZmniejszBiegClick() {
         if (samochod.getSprzeglo().isStanSprzegla()) {
             samochod.getSkrzynia().zmniejszBieg();
-            pokazBieg();
         } else {
-            pokazBiegGdyNiewcisniete();
+            pokazBladSprzegla();
         }
     }
 
-    private void pokazBieg() {
+    private void pokazBladSprzegla() {
         int b = samochod.getSkrzynia().getAktBieg();
-        if (b == -1) {
-            biegField.setText("R");
-        } else if (b == 0) {
-            biegField.setText("N");
-        } else {
-            biegField.setText(String.valueOf(b));
-        }
+        String nazwa = (b == -1) ? "R" : (b == 0) ? "N" : String.valueOf(b);
+        biegField.setText(nazwa + " (Wciśnij sprzęgło!)");
     }
 
-    private void pokazBiegGdyNiewcisniete() {
-        int b = samochod.getSkrzynia().getAktBieg();
-        String nazwaBiegu;
-        if (b == -1) {
-            nazwaBiegu = "R";
-        } else if (b == 0) {
-            nazwaBiegu = "N";
+    private void aktualizujInterfejs() {
+        if (samochod.isStanWlaczenia()) {
+            if (samochod.getSprzeglo().isStanSprzegla()) {
+                obrotyField.setText(samochod.getSilnik().getObroty() + " (zwolnij sprzęgło!)");
+            } else {
+                obrotyField.setText(samochod.getSilnik().getObroty() + " obr/min");
+            }
         } else {
-            nazwaBiegu = String.valueOf(b);
+            obrotyField.setText("0 (silnik wył)");
         }
-        biegField.setText(nazwaBiegu + " (Wciśnij sprzęgło!)");
+
+        predkoscField.setText(samochod.getAktPredkosc() + " km/h");
+
+        if (!biegField.getText().contains("Wciśnij")) {
+            int b = samochod.getSkrzynia().getAktBieg();
+            biegField.setText((b == -1) ? "R" : (b == 0) ? "N" : String.valueOf(b));
+        }
     }
 }

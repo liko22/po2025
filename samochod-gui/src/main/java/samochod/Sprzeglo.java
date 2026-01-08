@@ -1,7 +1,7 @@
 package samochod;
 
 public class Sprzeglo extends Komponent {
-    private boolean stanSprzegla;
+    private boolean stanSprzegla = false;
 
     public void wcisnij() {
         stanSprzegla = true;
