@@ -23,13 +23,13 @@
                                 <VBox spacing="5.0">
                                     <children>
                                         <Label text="Model" />
-                                        <TextField />
+                                        <TextField editable="false" />
                                         <Label text="Nr rejestracyjny" />
-                                        <TextField />
+                                        <TextField editable="false" />
                                         <Label text="Waga" />
-                                        <TextField />
+                                        <TextField editable="false" />
                                         <Label text="Prędkość" />
-                                        <TextField />
+                                        <TextField fx:id="predkoscField" editable="false" />
                                         <HBox spacing="10.0">
                                             <children>
                                                 <Button mnemonicParsing="false" text="Włącz" />
@@ -46,17 +46,17 @@
                                 <VBox spacing="5.0">
                                     <children>
                                         <Label text="Nazwa" />
-                                        <TextField />
+                                        <TextField editable="false" />
                                         <Label text="Cena" />
-                                        <TextField />
+                                        <TextField editable="false" />
                                         <Label text="Waga" />
-                                        <TextField />
+                                        <TextField editable="false" />
                                         <Label text="Bieg" />
-                                        <TextField />
+                                        <TextField fx:id="biegField" editable="false" />
                                         <HBox spacing="10.0">
                                             <children>
-                                                <Button mnemonicParsing="false" text="Zwiększ bieg" />
-                                                <Button mnemonicParsing="false" text="Zmniejsz bieg" />
+                                                <Button mnemonicParsing="false" onAction="#onZwiekszBiegClick" text="Zwiększ bieg" />
+                                                <Button mnemonicParsing="false" onAction="#onZmniejszBiegClick" text="Zmniejsz bieg" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -68,17 +68,17 @@
                                 <VBox spacing="5.0">
                                     <children>
                                         <Label text="Nazwa" />
-                                        <TextField />
+                                        <TextField editable="false" />
                                         <Label text="Cena" />
-                                        <TextField />
+                                        <TextField editable="false" />
                                         <Label text="Waga" />
-                                        <TextField />
+                                        <TextField editable="false" />
                                         <Label text="Obroty" />
-                                        <TextField />
+                                        <TextField editable="false" />
                                         <HBox spacing="10.0">
                                             <children>
-                                                <Button mnemonicParsing="false" text="Dodaj gazu" />
-                                                <Button mnemonicParsing="false" text="Ujmij gazu" />
+                                                <Button mnemonicParsing="false" text="Przyspiesz" />
+                                                <Button mnemonicParsing="false" text="Zatrzymaj się" />
                                             </children>
                                         </HBox>
                                     </children>
@@ -90,17 +90,17 @@
                                 <VBox spacing="5.0">
                                     <children>
                                         <Label text="Nazwa" />
-                                        <TextField />
+                                        <TextField editable="false" />
                                         <Label text="Cena" />
-                                        <TextField />
+                                        <TextField editable="false" />
                                         <Label text="Waga" />
-                                        <TextField />
+                                        <TextField editable="false" />
                                         <Label text="Stan" />
-                                        <TextField />
+                                        <TextField fx:id="stanSprzeglaField" editable="false" />
                                         <HBox spacing="10.0">
                                             <children>
-                                                <Button mnemonicParsing="false" text="Naciśnij" />
-                                                <Button mnemonicParsing="false" text="Zwolnij" />
+                                                <Button mnemonicParsing="false" onAction="#onNacisnijSprzegloClick" text="Naciśnij" />
+                                                <Button mnemonicParsing="false" onAction="#onZwolnijSprzegloClick" text="Zwolnij" />
                                             </children>
                                         </HBox>
                                     </children>

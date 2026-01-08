@@ -6,8 +6,9 @@ public class Samochod {
     private String model;
     private int predkoscMax;
 
-    private SkrzyniaBiegow skrzynia;
-    private Silnik silnik;
+    private SkrzyniaBiegow skrzynia = new SkrzyniaBiegow(6);
+    private Silnik silnik = new Silnik();
+    private Sprzeglo sprzeglo = new Sprzeglo();
     private Pozycja aktualnaPozycja;
 
     public void wlacz() {
@@ -34,5 +35,13 @@ public class Samochod {
 
     public Pozycja getAktPozycja() {
         return aktualnaPozycja;
+    }
+
+    public Sprzeglo getSprzeglo() {
+        return sprzeglo;
+    }
+
+    public SkrzyniaBiegow getSkrzynia() {
+        return skrzynia;
     }
 }
