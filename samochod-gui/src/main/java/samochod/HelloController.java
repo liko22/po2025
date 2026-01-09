@@ -31,7 +31,6 @@ public class HelloController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         listaSamochodow.add(new Samochod("Audi A4", "KR 12345", 1500, 180, 6));
-
         autoComboBox.setItems(listaSamochodow);
 
         if (!listaSamochodow.isEmpty()) {
@@ -40,36 +39,11 @@ public class HelloController implements Initializable {
             wyswietlDaneStatyczne();
         }
 
-        stanSprzeglaField.setText("Zwolnione");
-
         timer = new AnimationTimer() {
             @Override
             public void handle(long now) {
                 if (aktualnySamochod != null) {
-                    int predkosc = aktualnySamochod.getAktPredkosc();
-                    if (predkosc > 0) {
-                        double aktualneX = aktualnySamochod.getPozycja().getX();
-                        double layoutX = autoContainer.getLayoutX();
-                        double szerokoscMapy = mapaPane.getWidth();
-
-                        double zmiana;
-                        if (aktualnySamochod.getSkrzynia().getAktBieg() == -1) {
-                            zmiana = -(predkosc / 50.0);
-                        } else {
-                            zmiana = (predkosc / 50.0);
-                        }
-
-                        double nowaPozycjaX = aktualneX + zmiana;
-
-                        if (layoutX + nowaPozycjaX > szerokoscMapy) {
-                            nowaPozycjaX = -layoutX;
-                        } else if (layoutX + nowaPozycjaX < 0) {
-                            nowaPozycjaX = szerokoscMapy - layoutX - 100;
-                        }
-
-                        aktualnySamochod.getPozycja().setX(nowaPozycjaX);
-                        autoContainer.setTranslateX(nowaPozycjaX);
-                    }
+                    autoContainer.setTranslateX(aktualnySamochod.getPozycja().getX());
                     aktualizujInterfejs();
                 }
             }
@@ -118,53 +92,12 @@ public class HelloController implements Initializable {
 
     @FXML private void onWlaczClick() { if (aktualnySamochod != null) aktualnySamochod.wlacz(); }
     @FXML private void onWylaczClick() { if (aktualnySamochod != null) aktualnySamochod.wylacz(); }
-
-    @FXML
-    private void onPrzyspieszClick() {
-        if (aktualnySamochod != null && aktualnySamochod.isStanWlaczenia() && !aktualnySamochod.getSprzeglo().isStanSprzegla()) {
-            aktualnySamochod.getSilnik().zwiekszObroty();
-        }
-    }
-
+    @FXML private void onPrzyspieszClick() { if (aktualnySamochod != null && aktualnySamochod.isStanWlaczenia() && !aktualnySamochod.getSprzeglo().isStanSprzegla()) aktualnySamochod.getSilnik().zwiekszObroty(); }
     @FXML private void onZatrzymajClick() { if (aktualnySamochod != null) aktualnySamochod.getSilnik().zmniejszObroty(); }
-
-    @FXML
-    private void onNacisnijSprzegloClick() {
-        if (aktualnySamochod != null) {
-            aktualnySamochod.getSprzeglo().wcisnij();
-            stanSprzeglaField.setText("Wciśnięte");
-        }
-    }
-
-    @FXML
-    private void onZwolnijSprzegloClick() {
-        if (aktualnySamochod != null) {
-            aktualnySamochod.getSprzeglo().zwolnij();
-            stanSprzeglaField.setText("Zwolnione");
-        }
-    }
-
-    @FXML
-    private void onZwiekszBiegClick() {
-        if (aktualnySamochod != null) {
-            if (aktualnySamochod.getSprzeglo().isStanSprzegla()) {
-                aktualnySamochod.getSkrzynia().zwiekszBieg();
-            } else {
-                pokazBladSprzegla();
-            }
-        }
-    }
-
-    @FXML
-    private void onZmniejszBiegClick() {
-        if (aktualnySamochod != null) {
-            if (aktualnySamochod.getSprzeglo().isStanSprzegla()) {
-                aktualnySamochod.getSkrzynia().zmniejszBieg();
-            } else {
-                pokazBladSprzegla();
-            }
-        }
-    }
+    @FXML private void onNacisnijSprzegloClick() { if (aktualnySamochod != null) { aktualnySamochod.getSprzeglo().wcisnij(); stanSprzeglaField.setText("Wciśnięte"); } }
+    @FXML private void onZwolnijSprzegloClick() { if (aktualnySamochod != null) { aktualnySamochod.getSprzeglo().zwolnij(); stanSprzeglaField.setText("Zwolnione"); } }
+    @FXML private void onZwiekszBiegClick() { if (aktualnySamochod != null) { if (aktualnySamochod.getSprzeglo().isStanSprzegla()) aktualnySamochod.getSkrzynia().zwiekszBieg(); else pokazBladSprzegla(); } }
+    @FXML private void onZmniejszBiegClick() { if (aktualnySamochod != null) { if (aktualnySamochod.getSprzeglo().isStanSprzegla()) aktualnySamochod.getSkrzynia().zmniejszBieg(); else pokazBladSprzegla(); } }
 
     private void pokazBladSprzegla() {
         int b = aktualnySamochod.getSkrzynia().getAktBieg();
@@ -174,7 +107,6 @@ public class HelloController implements Initializable {
 
     private void aktualizujInterfejs() {
         if (aktualnySamochod == null) return;
-
         if (aktualnySamochod.isStanWlaczenia()) {
             String obrotyTekst = aktualnySamochod.getSilnik().getObroty() + " obr/min";
             if (aktualnySamochod.getSprzeglo().isStanSprzegla()) obrotyTekst += " (zwolnij!)";
@@ -182,12 +114,9 @@ public class HelloController implements Initializable {
         } else {
             obrotyField.setText("0 (wył)");
         }
-
         predkoscField.setText(aktualnySamochod.getAktPredkosc() + " km/h");
-
         int b = aktualnySamochod.getSkrzynia().getAktBieg();
         String nazwaBiegu = (b == -1) ? "R" : (b == 0) ? "N" : String.valueOf(b);
-
         if (aktualnySamochod.getSprzeglo().isStanSprzegla() || !biegField.getText().contains("Wciśnij")) {
             biegField.setText(nazwaBiegu);
         }
@@ -198,10 +127,8 @@ public class HelloController implements Initializable {
         try {
             javafx.fxml.FXMLLoader fxmlLoader = new javafx.fxml.FXMLLoader(getClass().getResource("nowe-auto.fxml"));
             javafx.scene.Parent root = fxmlLoader.load();
-
             NoweAutoController controller = fxmlLoader.getController();
             controller.setListaSamochodow(listaSamochodow);
-
             javafx.stage.Stage stage = new javafx.stage.Stage();
             stage.setTitle("Nowy Samochód");
             stage.initOwner(mapaPane.getScene().getWindow());
