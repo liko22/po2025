@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+
+<VBox spacing="10.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="samochod.NoweAutoController">
+    <padding>
+        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+    </padding>
+    <children>
+        <Label text="Model samochodu:" />
+        <TextField fx:id="modelField" />
+
+        <Label text="Numer rejestracyjny:" />
+        <TextField fx:id="nrField" />
+
+        <Label text="Waga (kg):" />
+        <TextField fx:id="wagaField" />
+
+        <Button mnemonicParsing="false" onAction="#onZapiszClick" text="Zapisz auto" />
+    </children>
+</VBox>

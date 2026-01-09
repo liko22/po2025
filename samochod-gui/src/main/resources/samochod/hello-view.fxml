@@ -23,11 +23,11 @@
                                 <VBox spacing="5.0">
                                     <children>
                                         <Label text="Model" />
-                                        <TextField editable="false" />
+                                        <TextField fx:id="modelGlowneField" editable="false" />
                                         <Label text="Nr rejestracyjny" />
-                                        <TextField editable="false" />
+                                        <TextField fx:id="nrGlowneField" editable="false" />
                                         <Label text="Waga" />
-                                        <TextField editable="false" />
+                                        <TextField fx:id="wagaGlowneField" editable="false" />
                                         <Label text="Prędkość" />
                                         <TextField fx:id="predkoscField" editable="false" />
                                         <HBox spacing="10.0">
@@ -117,8 +117,8 @@
                 <HBox alignment="CENTER" layoutX="450.0" layoutY="14.0" spacing="10.0" AnchorPane.rightAnchor="14.0" AnchorPane.topAnchor="14.0">
                     <children>
                         <Label text="Samochód:" />
-                        <ComboBox prefWidth="150.0" />
-                        <Button mnemonicParsing="false" text="Dodaj nowy" />
+                        <ComboBox fx:id="autoComboBox" onAction="#onAutoWybrane" prefWidth="150.0" />
+                        <Button mnemonicParsing="false" onAction="#onDodajNowyClick" text="Dodaj nowy" />
                         <Button mnemonicParsing="false" text="Usuń" />
                     </children>
                 </HBox>
