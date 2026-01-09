@@ -125,7 +125,7 @@
                 <Label layoutX="14.0" layoutY="14.0" text="Mapa" />
                 <VBox fx:id="autoContainer" alignment="CENTER" layoutX="14.0" layoutY="44.0" spacing="5.0">
                     <children>
-                        <ImageView fitHeight="60.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fx:id="carIcon" fitHeight="60.0" fitWidth="100.0" pickOnBounds="true" preserveRatio="true">
                             <image>
                                 <Image url="@auto1.png" />
                             </image>
