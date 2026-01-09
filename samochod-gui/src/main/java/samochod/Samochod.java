@@ -4,24 +4,26 @@ public class Samochod {
     private String model;
     private String nrRejestracyjny;
     private int waga;
+    private int predkoscMax;
     private boolean stanWlaczenia;
-    private int predkoscMax = 180;
-    private SkrzyniaBiegow skrzynia = new SkrzyniaBiegow(6);
+    private SkrzyniaBiegow skrzynia;
     private Silnik silnik = new Silnik();
     private Sprzeglo sprzeglo = new Sprzeglo();
 
-    // Konstruktor domyślny
     public Samochod() {
         this.model = "Nieznany";
         this.nrRejestracyjny = "---";
         this.waga = 1000;
+        this.predkoscMax = 180;
+        this.skrzynia = new SkrzyniaBiegow(6);
     }
 
-    // Konstruktor z parametrami (wykorzystywany w HelloController)
-    public Samochod(String model, String nrRejestracyjny, int waga) {
+    public Samochod(String model, String nrRejestracyjny, int waga, int predkoscMax, int iloscBiegow) {
         this.model = model;
         this.nrRejestracyjny = nrRejestracyjny;
         this.waga = waga;
+        this.predkoscMax = predkoscMax;
+        this.skrzynia = new SkrzyniaBiegow(iloscBiegow);
     }
 
     public void wlacz() {
@@ -35,31 +37,26 @@ public class Samochod {
         skrzynia.setAktualnyBieg(0);
     }
 
-    public boolean isStanWlaczenia() {
-        return stanWlaczenia;
-    }
-
     public int getAktPredkosc() {
         if (!stanWlaczenia) return 0;
         int bieg = skrzynia.getAktBieg();
-        if (bieg <= 0) return 0;
+        if (bieg == 0) return 0;
 
-        int obliczona = bieg * (silnik.getObroty() / 200);
+        int mnoznik = Math.abs(bieg);
+        int obliczona = mnoznik * (silnik.getObroty() / 200);
         return Math.min(obliczona, predkoscMax);
     }
 
-    // Gettery dla nowych pól
-    public String getModel() { return model; }
-    public String getNrRejestracyjny() { return nrRejestracyjny; }
-    public int getWaga() { return waga; }
-
-    public Silnik getSilnik() { return silnik; }
-    public Sprzeglo getSprzeglo() { return sprzeglo; }
-    public SkrzyniaBiegow getSkrzynia() { return skrzynia; }
-
-    // Metoda toString, aby ComboBox wyświetlał czytelną nazwę
     @Override
     public String toString() {
         return model + " [" + nrRejestracyjny + "]";
     }
+
+    public String getModel() { return model; }
+    public String getNrRejestracyjny() { return nrRejestracyjny; }
+    public int getWaga() { return waga; }
+    public boolean isStanWlaczenia() { return stanWlaczenia; }
+    public Silnik getSilnik() { return silnik; }
+    public Sprzeglo getSprzeglo() { return sprzeglo; }
+    public SkrzyniaBiegow getSkrzynia() { return skrzynia; }
 }

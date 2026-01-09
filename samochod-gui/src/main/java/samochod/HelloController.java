@@ -30,12 +30,10 @@ public class HelloController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        // Dodanie startowych samochodów
-        listaSamochodow.add(new Samochod("Skoda Fabia", "KR 12345", 1500));
+        listaSamochodow.add(new Samochod("Audi A4", "KR 12345", 1500, 180, 6));
 
         autoComboBox.setItems(listaSamochodow);
 
-        // Wybranie pierwszego auta na start
         if (!listaSamochodow.isEmpty()) {
             autoComboBox.getSelectionModel().selectFirst();
             aktualnySamochod = autoComboBox.getValue();
@@ -53,10 +51,20 @@ public class HelloController implements Initializable {
                         double aktualnyTranslate = autoContainer.getTranslateX();
                         double layoutX = autoContainer.getLayoutX();
                         double szerokoscMapy = mapaPane.getWidth();
-                        double nowaPozycja = aktualnyTranslate + (predkosc / 50.0);
+
+                        double zmiana;
+                        if (aktualnySamochod.getSkrzynia().getAktBieg() == -1) {
+                            zmiana = -(predkosc / 50.0);
+                        } else {
+                            zmiana = (predkosc / 50.0);
+                        }
+
+                        double nowaPozycja = aktualnyTranslate + zmiana;
 
                         if (layoutX + nowaPozycja > szerokoscMapy) {
                             autoContainer.setTranslateX(0);
+                        } else if (layoutX + nowaPozycja < 0) {
+                            autoContainer.setTranslateX(szerokoscMapy - layoutX - 100);
                         } else {
                             autoContainer.setTranslateX(nowaPozycja);
                         }
@@ -75,6 +83,27 @@ public class HelloController implements Initializable {
         aktualizujInterfejs();
     }
 
+    @FXML
+    private void onUsunClick() {
+        if (aktualnySamochod != null) {
+            listaSamochodow.remove(aktualnySamochod);
+            if (listaSamochodow.isEmpty()) {
+                aktualnySamochod = null;
+                modelGlowneField.clear();
+                nrGlowneField.clear();
+                wagaGlowneField.clear();
+                stanSprzeglaField.clear();
+                biegField.clear();
+                predkoscField.clear();
+                obrotyField.clear();
+                autoContainer.setTranslateX(0);
+            } else {
+                autoComboBox.getSelectionModel().selectFirst();
+                onAutoWybrane();
+            }
+        }
+    }
+
     private void wyswietlDaneStatyczne() {
         if (aktualnySamochod != null) {
             modelGlowneField.setText(aktualnySamochod.getModel());
@@ -83,28 +112,17 @@ public class HelloController implements Initializable {
         }
     }
 
-    @FXML
-    private void onWlaczClick() {
-        if (aktualnySamochod != null) aktualnySamochod.wlacz();
-    }
-
-    @FXML
-    private void onWylaczClick() {
-        if (aktualnySamochod != null) aktualnySamochod.wylacz();
-    }
+    @FXML private void onWlaczClick() { if (aktualnySamochod != null) aktualnySamochod.wlacz(); }
+    @FXML private void onWylaczClick() { if (aktualnySamochod != null) aktualnySamochod.wylacz(); }
 
     @FXML
     private void onPrzyspieszClick() {
-        if (aktualnySamochod == null || !aktualnySamochod.isStanWlaczenia()) return;
-        if (!aktualnySamochod.getSprzeglo().isStanSprzegla()) {
+        if (aktualnySamochod != null && aktualnySamochod.isStanWlaczenia() && !aktualnySamochod.getSprzeglo().isStanSprzegla()) {
             aktualnySamochod.getSilnik().zwiekszObroty();
         }
     }
 
-    @FXML
-    private void onZatrzymajClick() {
-        if (aktualnySamochod != null) aktualnySamochod.getSilnik().zmniejszObroty();
-    }
+    @FXML private void onZatrzymajClick() { if (aktualnySamochod != null) aktualnySamochod.getSilnik().zmniejszObroty(); }
 
     @FXML
     private void onNacisnijSprzegloClick() {
@@ -124,21 +142,23 @@ public class HelloController implements Initializable {
 
     @FXML
     private void onZwiekszBiegClick() {
-        if (aktualnySamochod == null) return;
-        if (aktualnySamochod.getSprzeglo().isStanSprzegla()) {
-            aktualnySamochod.getSkrzynia().zwiekszBieg();
-        } else {
-            pokazBladSprzegla();
+        if (aktualnySamochod != null) {
+            if (aktualnySamochod.getSprzeglo().isStanSprzegla()) {
+                aktualnySamochod.getSkrzynia().zwiekszBieg();
+            } else {
+                pokazBladSprzegla();
+            }
         }
     }
 
     @FXML
     private void onZmniejszBiegClick() {
-        if (aktualnySamochod == null) return;
-        if (aktualnySamochod.getSprzeglo().isStanSprzegla()) {
-            aktualnySamochod.getSkrzynia().zmniejszBieg();
-        } else {
-            pokazBladSprzegla();
+        if (aktualnySamochod != null) {
+            if (aktualnySamochod.getSprzeglo().isStanSprzegla()) {
+                aktualnySamochod.getSkrzynia().zmniejszBieg();
+            } else {
+                pokazBladSprzegla();
+            }
         }
     }
 
@@ -152,20 +172,20 @@ public class HelloController implements Initializable {
         if (aktualnySamochod == null) return;
 
         if (aktualnySamochod.isStanWlaczenia()) {
-            if (aktualnySamochod.getSprzeglo().isStanSprzegla()) {
-                obrotyField.setText(aktualnySamochod.getSilnik().getObroty() + " (zwolnij sprzęgło!)");
-            } else {
-                obrotyField.setText(aktualnySamochod.getSilnik().getObroty() + " obr/min");
-            }
+            String obrotyTekst = aktualnySamochod.getSilnik().getObroty() + " obr/min";
+            if (aktualnySamochod.getSprzeglo().isStanSprzegla()) obrotyTekst += " (zwolnij!)";
+            obrotyField.setText(obrotyTekst);
         } else {
-            obrotyField.setText("0 (silnik wył)");
+            obrotyField.setText("0 (wył)");
         }
 
         predkoscField.setText(aktualnySamochod.getAktPredkosc() + " km/h");
 
-        if (!biegField.getText().contains("Wciśnij")) {
-            int b = aktualnySamochod.getSkrzynia().getAktBieg();
-            biegField.setText((b == -1) ? "R" : (b == 0) ? "N" : String.valueOf(b));
+        int b = aktualnySamochod.getSkrzynia().getAktBieg();
+        String nazwaBiegu = (b == -1) ? "R" : (b == 0) ? "N" : String.valueOf(b);
+
+        if (aktualnySamochod.getSprzeglo().isStanSprzegla() || !biegField.getText().contains("Wciśnij")) {
+            biegField.setText(nazwaBiegu);
         }
     }
 
@@ -174,10 +194,13 @@ public class HelloController implements Initializable {
         try {
             javafx.fxml.FXMLLoader fxmlLoader = new javafx.fxml.FXMLLoader(getClass().getResource("nowe-auto.fxml"));
             javafx.scene.Parent root = fxmlLoader.load();
+
+            NoweAutoController controller = fxmlLoader.getController();
+            controller.setListaSamochodow(listaSamochodow);
+
             javafx.stage.Stage stage = new javafx.stage.Stage();
             stage.setTitle("Nowy Samochód");
-            javafx.stage.Stage glowneOkno = (javafx.stage.Stage) mapaPane.getScene().getWindow();
-            stage.initOwner(glowneOkno);
+            stage.initOwner(mapaPane.getScene().getWindow());
             stage.setScene(new javafx.scene.Scene(root));
             stage.show();
         } catch (java.io.IOException e) {

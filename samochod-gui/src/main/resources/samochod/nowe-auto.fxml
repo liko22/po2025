@@ -18,6 +18,17 @@
         <Label text="Waga (kg):" />
         <TextField fx:id="wagaField" />
 
+        <Label text="Prędkość maksymalna (km/h):" />
+        <TextField fx:id="predkoscField" />
+
+        <Label text="Ilość biegów:" />
+        <RadioButton fx:id="bieg5" text="5" selected="true">
+            <toggleGroup>
+                <ToggleGroup fx:id="biegiGroup" />
+            </toggleGroup>
+        </RadioButton>
+        <RadioButton fx:id="bieg6" text="6" toggleGroup="$biegiGroup" />
+
         <Button mnemonicParsing="false" onAction="#onZapiszClick" text="Zapisz auto" />
     </children>
 </VBox>

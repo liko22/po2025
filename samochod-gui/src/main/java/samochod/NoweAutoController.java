@@ -1,25 +1,42 @@
 package samochod;
 
 import javafx.fxml.FXML;
+import javafx.scene.control.RadioButton;
 import javafx.scene.control.TextField;
+import javafx.scene.control.ToggleGroup;
+import javafx.collections.ObservableList;
 import javafx.stage.Stage;
 
 public class NoweAutoController {
     @FXML private TextField modelField;
     @FXML private TextField nrField;
     @FXML private TextField wagaField;
+    @FXML private TextField predkoscField;
+    @FXML private RadioButton bieg5;
+    @FXML private RadioButton bieg6;
+
+    private ObservableList<Samochod> listaSamochodow;
+
+    public void setListaSamochodow(ObservableList<Samochod> lista) {
+        this.listaSamochodow = lista;
+    }
 
     @FXML
     private void onZapiszClick() {
-        String model = modelField.getText();
-        String nr = nrField.getText();
-        String waga = wagaField.getText();
+        try {
+            String model = modelField.getText();
+            String nr = nrField.getText();
+            int waga = Integer.parseInt(wagaField.getText());
+            int vMax = Integer.parseInt(predkoscField.getText());
+            int biegi = bieg5.isSelected() ? 5 : 6;
 
-        if (model.isEmpty() || nr.isEmpty() || waga.isEmpty()) {
-            return;
+            Samochod nowe = new Samochod(model, nr, waga, vMax, biegi);
+            listaSamochodow.add(nowe);
+
+            Stage stage = (Stage) modelField.getScene().getWindow();
+            stage.close();
+        } catch (NumberFormatException e) {
+            System.out.println("Błąd w danych liczbowych!");
         }
-
-        Stage stage = (Stage) modelField.getScene().getWindow();
-        stage.close();
     }
 }
