@@ -40,9 +40,9 @@ public class Samochod extends Thread {
                 if (predkosc > 0) {
                     double zmiana;
                     if (skrzynia.getAktBieg() == -1) {
-                        zmiana = -(predkosc / 10.0);
+                        zmiana = -(predkosc / 100.0);
                     } else {
-                        zmiana = (predkosc / 10.0);
+                        zmiana = (predkosc / 100.0);
                     }
 
                     double nowaPozycjaX = pozycja.getX() + zmiana;
