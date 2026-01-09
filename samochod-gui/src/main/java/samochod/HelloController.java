@@ -48,7 +48,7 @@ public class HelloController implements Initializable {
                 if (aktualnySamochod != null) {
                     int predkosc = aktualnySamochod.getAktPredkosc();
                     if (predkosc > 0) {
-                        double aktualnyTranslate = autoContainer.getTranslateX();
+                        double aktualneX = aktualnySamochod.getPozycja().getX();
                         double layoutX = autoContainer.getLayoutX();
                         double szerokoscMapy = mapaPane.getWidth();
 
@@ -59,15 +59,16 @@ public class HelloController implements Initializable {
                             zmiana = (predkosc / 50.0);
                         }
 
-                        double nowaPozycja = aktualnyTranslate + zmiana;
+                        double nowaPozycjaX = aktualneX + zmiana;
 
-                        if (layoutX + nowaPozycja > szerokoscMapy) {
-                            autoContainer.setTranslateX(0);
-                        } else if (layoutX + nowaPozycja < 0) {
-                            autoContainer.setTranslateX(szerokoscMapy - layoutX - 100);
-                        } else {
-                            autoContainer.setTranslateX(nowaPozycja);
+                        if (layoutX + nowaPozycjaX > szerokoscMapy) {
+                            nowaPozycjaX = -layoutX;
+                        } else if (layoutX + nowaPozycjaX < 0) {
+                            nowaPozycjaX = szerokoscMapy - layoutX - 100;
                         }
+
+                        aktualnySamochod.getPozycja().setX(nowaPozycjaX);
+                        autoContainer.setTranslateX(nowaPozycjaX);
                     }
                     aktualizujInterfejs();
                 }
@@ -79,8 +80,11 @@ public class HelloController implements Initializable {
     @FXML
     private void onAutoWybrane() {
         aktualnySamochod = autoComboBox.getValue();
-        wyswietlDaneStatyczne();
-        aktualizujInterfejs();
+        if (aktualnySamochod != null) {
+            autoContainer.setTranslateX(aktualnySamochod.getPozycja().getX());
+            wyswietlDaneStatyczne();
+            aktualizujInterfejs();
+        }
     }
 
     @FXML

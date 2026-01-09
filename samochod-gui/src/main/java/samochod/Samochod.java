@@ -9,6 +9,7 @@ public class Samochod {
     private SkrzyniaBiegow skrzynia;
     private Silnik silnik = new Silnik();
     private Sprzeglo sprzeglo = new Sprzeglo();
+    private Pozycja pozycja = new Pozycja();
 
     public Samochod() {
         this.model = "Nieznany";
@@ -16,6 +17,7 @@ public class Samochod {
         this.waga = 1000;
         this.predkoscMax = 180;
         this.skrzynia = new SkrzyniaBiegow(6);
+        this.pozycja.setX(0);
     }
 
     public Samochod(String model, String nrRejestracyjny, int waga, int predkoscMax, int iloscBiegow) {
@@ -24,6 +26,7 @@ public class Samochod {
         this.waga = waga;
         this.predkoscMax = predkoscMax;
         this.skrzynia = new SkrzyniaBiegow(iloscBiegow);
+        this.pozycja.setX(0);
     }
 
     public void wlacz() {
@@ -59,4 +62,5 @@ public class Samochod {
     public Silnik getSilnik() { return silnik; }
     public Sprzeglo getSprzeglo() { return sprzeglo; }
     public SkrzyniaBiegow getSkrzynia() { return skrzynia; }
+    public Pozycja getPozycja() { return pozycja; }
 }
