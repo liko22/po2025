@@ -118,7 +118,7 @@
                     <children>
                         <Label text="Samochód:" />
                         <ComboBox fx:id="autoComboBox" onAction="#onAutoWybrane" prefWidth="150.0" />
-                        <Button mnemonicParsing="false" onAction="#onDodajNowyClick" text="Dodaj nowy" />
+                        <Button fx:id="dodajBtn" mnemonicParsing="false" onAction="#onDodajNowyClick" text="Dodaj nowy" />
                         <Button mnemonicParsing="false" onAction="#onUsunClick" text="Usuń" />
                     </children>
                 </HBox>

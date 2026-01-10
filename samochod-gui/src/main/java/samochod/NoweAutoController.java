@@ -28,7 +28,14 @@ public class NoweAutoController {
             String nr = nrField.getText();
             int waga = Integer.parseInt(wagaField.getText());
             int vMax = Integer.parseInt(predkoscField.getText());
-            int biegi = bieg5.isSelected() ? 5 : 6;
+            int biegi;
+            if (bieg5.isSelected()) {
+                biegi = 5;
+            } else if (bieg6.isSelected()) {
+                biegi = 6;
+            } else {
+                biegi = 6;
+            }
 
             Samochod nowe = new Samochod(model, nr, waga, vMax, biegi);
             listaSamochodow.add(nowe);

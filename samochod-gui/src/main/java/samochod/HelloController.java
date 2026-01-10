@@ -4,9 +4,11 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.fxml.Initializable;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.VBox;
 import javafx.scene.layout.AnchorPane;
@@ -31,6 +33,7 @@ public class HelloController implements Initializable {
     @FXML private VBox autoContainer;
     @FXML private AnchorPane mapaPane;
     @FXML private ImageView carIcon;
+    @FXML private Button dodajBtn;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -72,6 +75,8 @@ public class HelloController implements Initializable {
     }
 
     private void aktualizujInterfejs() {
+        dodajBtn.setDisable(listaSamochodow.size() >= 3);
+
         if (aktualnySamochod == null) return;
 
         if (aktualnySamochod.isStanWlaczenia()) {
@@ -165,6 +170,26 @@ public class HelloController implements Initializable {
         if (aktualnySamochod != null) {
             wyswietlDaneStatyczne();
             aktualizujInterfejs();
+            aktualizujIkone();
+        }
+    }
+
+    private void aktualizujIkone() {
+        int index = listaSamochodow.indexOf(aktualnySamochod);
+        String imagePath;
+
+        switch (index) {
+            case 0: imagePath = "auto1.png"; break;
+            case 1: imagePath = "auto2.png"; break;
+            case 2: imagePath = "auto3.png"; break;
+            default: imagePath = "auto1.png"; break;
+        }
+
+        try {
+            Image img = new Image(getClass().getResourceAsStream(imagePath));
+            carIcon.setImage(img);
+        } catch (Exception e) {
+            System.out.println("Nie znaleziono pliku graficznego: " + imagePath);
         }
     }
 
@@ -178,6 +203,7 @@ public class HelloController implements Initializable {
                 autoComboBox.getSelectionModel().selectFirst();
                 onAutoWybrane();
             }
+            aktualizujInterfejs();
         }
     }
 
@@ -198,6 +224,7 @@ public class HelloController implements Initializable {
             modelGlowneField.setText(aktualnySamochod.getModel());
             nrGlowneField.setText(aktualnySamochod.getNrRejestracyjny());
             wagaGlowneField.setText(aktualnySamochod.getWaga() + " kg");
+            aktualizujIkone();
         }
     }
 
