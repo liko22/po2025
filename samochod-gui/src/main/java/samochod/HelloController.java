@@ -34,6 +34,15 @@ public class HelloController implements Initializable {
     @FXML private AnchorPane mapaPane;
     @FXML private ImageView carIcon;
     @FXML private Button dodajBtn;
+    @FXML private TextField silnikNazwaField;
+    @FXML private TextField silnikCenaField;
+    @FXML private TextField silnikWagaField;
+    @FXML private TextField skrzyniaNazwaField;
+    @FXML private TextField skrzyniaCenaField;
+    @FXML private TextField skrzyniaWagaField;
+    @FXML private TextField sprzegloNazwaField;
+    @FXML private TextField sprzegloCenaField;
+    @FXML private TextField sprzegloWagaField;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
@@ -175,6 +184,7 @@ public class HelloController implements Initializable {
     }
 
     private void aktualizujIkone() {
+        if (aktualnySamochod == null) return;
         int index = listaSamochodow.indexOf(aktualnySamochod);
         String imagePath;
 
@@ -184,17 +194,17 @@ public class HelloController implements Initializable {
             case 2: imagePath = "auto3.png"; break;
             default: imagePath = "auto1.png"; break;
         }
-
-        try {
-            Image img = new Image(getClass().getResourceAsStream(imagePath));
-            carIcon.setImage(img);
-        } catch (Exception e) {
-            System.out.println("Nie znaleziono pliku graficznego: " + imagePath);
-        }
+        Image img = new Image(getClass().getResourceAsStream(imagePath));
+        carIcon.setImage(img);
     }
 
     @FXML private void onUsunClick() {
         if (aktualnySamochod != null) {
+            //nie usuwamy auta podstawowego
+            if (listaSamochodow.indexOf(aktualnySamochod) == 0) {
+                return;
+            }
+
             listaSamochodow.remove(aktualnySamochod);
             if (listaSamochodow.isEmpty()) {
                 aktualnySamochod = null;
@@ -224,6 +234,19 @@ public class HelloController implements Initializable {
             modelGlowneField.setText(aktualnySamochod.getModel());
             nrGlowneField.setText(aktualnySamochod.getNrRejestracyjny());
             wagaGlowneField.setText(aktualnySamochod.getWaga() + " kg");
+
+            silnikNazwaField.setText(aktualnySamochod.getSilnik().getNazwa());
+            silnikCenaField.setText(aktualnySamochod.getSilnik().getCena() + " zł");
+            silnikWagaField.setText(aktualnySamochod.getSilnik().getWaga() + " kg");
+
+            skrzyniaNazwaField.setText(aktualnySamochod.getSkrzynia().getNazwa());
+            skrzyniaCenaField.setText(aktualnySamochod.getSkrzynia().getCena() + " zł");
+            skrzyniaWagaField.setText(aktualnySamochod.getSkrzynia().getWaga() + " kg");
+
+            sprzegloNazwaField.setText(aktualnySamochod.getSprzeglo().getNazwa());
+            sprzegloCenaField.setText(aktualnySamochod.getSprzeglo().getCena() + " zł");
+            sprzegloWagaField.setText(aktualnySamochod.getSprzeglo().getWaga() + " kg");
+
             aktualizujIkone();
         }
     }
@@ -241,6 +264,7 @@ public class HelloController implements Initializable {
             stage.setScene(new javafx.scene.Scene(root));
             stage.show();
         } catch (java.io.IOException e) {
+            System.out.println("Problem z plikiem gui lub sciezka!");
             e.printStackTrace();
         }
     }

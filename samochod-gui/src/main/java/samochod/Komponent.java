@@ -1,9 +1,9 @@
 package samochod;
 
 public class Komponent {
-    private String nazwa;
-    private double waga;
-    private double cena;
+    protected String nazwa;
+    protected double waga;
+    protected double cena;
 
     public String getNazwa() {
         return nazwa;

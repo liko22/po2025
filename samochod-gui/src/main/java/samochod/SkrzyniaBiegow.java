@@ -6,6 +6,10 @@ public class SkrzyniaBiegow extends Komponent {
 
     public SkrzyniaBiegow(int iloscBiegow) {
         this.iloscBiegow = iloscBiegow;
+        this.aktualnyBieg = 0;
+        this.nazwa = "Manual " + iloscBiegow + " biegów";
+        this.waga = 50.0;
+        this.cena = 4500.0;
     }
 
     public void zwiekszBieg() {
@@ -15,7 +19,7 @@ public class SkrzyniaBiegow extends Komponent {
     }
 
     public void zmniejszBieg() {
-        if (aktualnyBieg > -1) {
+        if (aktualnyBieg > 0) {
             aktualnyBieg--;
         }
     }
@@ -25,6 +29,8 @@ public class SkrzyniaBiegow extends Komponent {
     }
 
     public void setAktualnyBieg(int bieg) {
-        this.aktualnyBieg = bieg;
+        if (bieg >= 0 && bieg <= iloscBiegow) {
+            this.aktualnyBieg = bieg;
+        }
     }
 }

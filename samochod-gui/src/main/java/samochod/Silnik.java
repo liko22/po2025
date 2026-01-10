@@ -4,6 +4,12 @@ public class Silnik extends Komponent {
     private int obroty;
     private final int MAX_OBROTY = 6300;
 
+    public Silnik() {
+        this.nazwa = "1.9 TDI";
+        this.waga = 200.0;
+        this.cena = 7000.0;
+    }
+
     public void uruchom() {
         this.obroty = 800;
     }

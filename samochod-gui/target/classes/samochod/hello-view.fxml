@@ -45,11 +45,11 @@
                                 <VBox spacing="5.0">
                                     <children>
                                         <Label text="Nazwa" />
-                                        <TextField editable="false" />
+                                        <TextField fx:id="skrzyniaNazwaField" editable="false" />
                                         <Label text="Cena" />
-                                        <TextField editable="false" />
+                                        <TextField fx:id="skrzyniaCenaField" editable="false" />
                                         <Label text="Waga" />
-                                        <TextField editable="false" />
+                                        <TextField fx:id="skrzyniaWagaField" editable="false" />
                                         <Label text="Bieg" />
                                         <TextField fx:id="biegField" editable="false" />
                                         <HBox spacing="10.0">
@@ -67,11 +67,11 @@
                                 <VBox spacing="5.0">
                                     <children>
                                         <Label text="Nazwa" />
-                                        <TextField editable="false" />
+                                        <TextField fx:id="silnikNazwaField" editable="false" />
                                         <Label text="Cena" />
-                                        <TextField editable="false" />
+                                        <TextField fx:id="silnikCenaField" editable="false" />
                                         <Label text="Waga" />
-                                        <TextField editable="false" />
+                                        <TextField fx:id="silnikWagaField" editable="false" />
                                         <Label text="Obroty" />
                                         <TextField fx:id="obrotyField" editable="false" />
                                         <HBox spacing="10.0">
@@ -89,11 +89,11 @@
                                 <VBox spacing="5.0">
                                     <children>
                                         <Label text="Nazwa" />
-                                        <TextField editable="false" />
+                                        <TextField fx:id="sprzegloNazwaField" editable="false" />
                                         <Label text="Cena" />
-                                        <TextField editable="false" />
+                                        <TextField fx:id="sprzegloCenaField" editable="false" />
                                         <Label text="Waga" />
-                                        <TextField editable="false" />
+                                        <TextField fx:id="sprzegloWagaField" editable="false" />
                                         <Label text="Stan" />
                                         <TextField fx:id="stanSprzeglaField" editable="false" />
                                         <HBox spacing="10.0">
