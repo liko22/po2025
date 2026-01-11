@@ -28,6 +28,17 @@ public class NoweAutoController {
             String nr = nrField.getText();
             int waga = Integer.parseInt(wagaField.getText());
             int vMax = Integer.parseInt(predkoscField.getText());
+            //ograniczenia tego co wpisujemy  do pola
+            if (waga < 800 || waga > 5000) {
+                System.out.println("Waga musi być 800-5000");
+                return;
+            }
+
+            if (vMax < 100 || vMax > 200) {
+                System.out.println("Prędkość musi być 100-200");
+                return;
+            }
+
             int biegi;
             if (bieg5.isSelected()) {
                 biegi = 5;
