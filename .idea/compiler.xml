@@ -6,9 +6,10 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
+        <module name="samochod-gui" />
+        <module name="KreatorEgzaminow" />
         <module name="symulator" />
         <module name="symulatorGUI" />
-        <module name="samochod-gui" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
