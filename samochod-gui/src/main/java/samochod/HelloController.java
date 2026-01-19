@@ -46,7 +46,8 @@ public class HelloController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        listaSamochodow.add(new Samochod("Audi A4", "KR 12345", 1500, 180, 6));
+        Silnik silnikStartowy = new Silnik("1.9 TDI", 200.0, 7000.0);
+        listaSamochodow.add(new Samochod("Skoda FABIA", "KT12345", 1500, 150, 5, silnikStartowy));
         autoComboBox.setItems(listaSamochodow);
 
         if (!listaSamochodow.isEmpty()) {
@@ -90,6 +91,7 @@ public class HelloController implements Initializable {
 
         if (aktualnySamochod.isStanWlaczenia()) {
             String obrotyTekst = aktualnySamochod.getSilnik().getObroty() + " obr/min";
+            //probaPrzyspieszaniaBezSprzegla true=przyspieszasz na wcisnietym
             if (probaPrzyspieszaniaBezSprzegla && aktualnySamochod.getSprzeglo().isStanSprzegla()) {
                 obrotyTekst += " (zwolnij sprzeglo!)";
             }
@@ -235,9 +237,10 @@ public class HelloController implements Initializable {
             nrGlowneField.setText(aktualnySamochod.getNrRejestracyjny());
             wagaGlowneField.setText(aktualnySamochod.getWaga() + " kg");
 
-            silnikNazwaField.setText(aktualnySamochod.getSilnik().getNazwa());
-            silnikCenaField.setText(aktualnySamochod.getSilnik().getCena() + " zł");
-            silnikWagaField.setText(aktualnySamochod.getSilnik().getWaga() + " kg");
+            Silnik s = aktualnySamochod.getSilnik();
+            silnikNazwaField.setText(s.getNazwa());
+            silnikCenaField.setText(s.getCena() + " zł");
+            silnikWagaField.setText(s.getWaga() + " kg");
 
             skrzyniaNazwaField.setText(aktualnySamochod.getSkrzynia().getNazwa());
             skrzyniaCenaField.setText(aktualnySamochod.getSkrzynia().getCena() + " zł");

@@ -21,6 +21,9 @@
         <Label text="Prędkość maksymalna (km/h):" />
         <TextField fx:id="predkoscField" />
 
+        <Label text="Wybierz silnik:" />
+        <ComboBox fx:id="silnikCombo" prefWidth="200.0" />
+
         <Label text="Ilość biegów:" />
         <RadioButton fx:id="bieg5" text="5" selected="true">
             <toggleGroup>

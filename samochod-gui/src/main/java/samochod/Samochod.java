@@ -7,30 +7,21 @@ public class Samochod extends Thread {
     private int predkoscMax;
     private boolean stanWlaczenia;
     private SkrzyniaBiegow skrzynia;
-    private Silnik silnik = new Silnik();
+    private Silnik silnik;
     private Sprzeglo sprzeglo = new Sprzeglo();
     private Pozycja pozycja = new Pozycja();
     private Pozycja cel;
 
-    public Samochod() {
-        this.model = "Nieznany";
-        this.nrRejestracyjny = "---";
-        this.waga = 1000;
-        this.predkoscMax = 180;
-        this.skrzynia = new SkrzyniaBiegow(6);
-        this.pozycja.setX(0);
-        this.pozycja.setY(0);
-        this.start();
-    }
-
-    public Samochod(String model, String nrRejestracyjny, int waga, int predkoscMax, int iloscBiegow) {
+    public Samochod(String model, String nrRejestracyjny, int waga, int predkoscMax, int iloscBiegow, Silnik wybranySilnik) {
         this.model = model;
         this.nrRejestracyjny = nrRejestracyjny;
         this.waga = waga;
         this.predkoscMax = predkoscMax;
         this.skrzynia = new SkrzyniaBiegow(iloscBiegow);
+        this.silnik = wybranySilnik;
         this.pozycja.setX(0);
         this.pozycja.setY(0);
+        this.setDaemon(true);
         this.start();
     }
 
@@ -58,7 +49,7 @@ public class Samochod extends Thread {
                 }
                 Thread.sleep(10);
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                break;
             }
         }
     }
@@ -67,8 +58,7 @@ public class Samochod extends Thread {
         if (!stanWlaczenia) return 0;
         int bieg = skrzynia.getAktBieg();
         if (bieg <= 0) return 0;
-        int mnoznik = bieg;
-        int obliczona = mnoznik * (silnik.getObroty() / 200);
+        int obliczona = bieg * (silnik.getObroty() / 200);
         return Math.min(obliczona, predkoscMax);
     }
 
